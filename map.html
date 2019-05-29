@@ -11,7 +11,7 @@
 <!-- --------------------------------------------------------------
 Define json and stock it in localStorage to test datas of positions
 -------------------------------------------------------------------- -->
-    <script LANGUAGE="text/javascript">
+    <script type="text/javascript">
 
       let json = {
       "person":[
@@ -43,7 +43,7 @@ Define json and stock it in localStorage to test datas of positions
           "Wz":1320.75
         }
         ]
-      }
+      },
       {
         "bodyId": 70,
         "path": [
@@ -54,7 +54,7 @@ Define json and stock it in localStorage to test datas of positions
           "Wx":-399.699,
           "Wy":36.499,
           "Wz":1196.22
-        }
+        },
         {
           "status":"Tracking started",
           "date": "23/05/2019",
@@ -113,37 +113,54 @@ JS Function to draw a hot zone, a zone with lot of traffic
 JS Function to draw client path, step by step
 -------------------------------------------------------------------- -->
     <script type="text/javascript">
+
+      //function to define randomly the color of the path 
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+
+
       function draw_path() {
         var canvas = document.getElementById("canvas");
 
-        coordX=new Array(100, 112, 120)
-        coordY=new Array(100, 97, 90)
+        colors=new Array("orange", "blue", "red", "green", "yellow", "grey", "pink");
         
         //Read the json from 
         var string_json = localStorage.getItem("dataCamera");
-        var json = string_json && JSON.parse(string_json);
+        var json = JSON.parse(string_json);
 
-        //alert("test")
-        alert(json);
+        var canvas = document.getElementById('canvas');
 
         if (canvas.getContext) {
-          alert("OK CONTEXT")
           var ctx = canvas.getContext('2d');
 
-          for(i=0; i<coordX.length; i++){
-            var cercle = new Path2D();
-            cercle.moveTo(coordX[i], coordY[i]);
-            cercle.arc(coordX[i], coordY[i], 2, 0, 2 * Math.PI);
-            ctx.fill(cercle);
-          }
+          for(p=0; p<json['person'].length; p++){
+            var color_person=getRandomInt(colors.length-1);
+            for(i=0; i<json['person'][p]['path'].length; i++){
 
-          ctx.beginPath();
-          for(i=0; i<coordX.length; i++){
-            ctx.lineTo(coordX[i],coordY[i]);
+              //Convert coordinates from camera reference frame in real word in cm (Wx, Wy, Wz) to Canvas reference farme in pix (Cx, Cy) with the origin in the top-left corner
+              var Wx=json['person'][p]['path'][i].Wx;
+              var Wz=json['person'][p]['path'][i].Wz;
+              var Cx=Math.trunc(Wx/10)+(canvas.width/2);
+              var Cz=canvas.height - Math.trunc(Wz/10);
+
+              var cercle = new Path2D();
+              cercle.moveTo(Cx,Cz);
+              cercle.arc(Cx, Cz, 2, 0, 2 * Math.PI);
+              ctx.fillStyle = colors[color_person];
+              ctx.fill(cercle);
+              
+            
+              /*
+            ctx.beginPath();
+            for(i=0; i<json['person'][p]['path'].length; i++){
+              ctx.lineTo(Cx,Cy);
+            }
+            ctx.stroke();*/
           }
-          ctx.stroke();
         }
       }
+    }
     </script>
 
     <form>
