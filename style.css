@@ -1,99 +1,67 @@
-<!DOCTYPE html>
-<html>
-  <head>
 
-    <link href="http://fr.allfont.net/allfont.css?fonts=montserrat-light" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="style.css" />
-
-  
-    <script type="application/javascript">
-    function dessiner() {
-      var canvas = document.getElementById('canvas');
-      if (canvas.getContext) {
-        var ctx = canvas.getContext('2d');
-
-        for(var i = 1; i < 5; i++) {
-          for(var j = 1; j < 4; j++) {
-            ctx.beginPath();
-            var x = 25 + j * 100; // Coordonnée x
-            var y = 25 + i * 100; // Coordonnée y
-            ctx.arc(x, y, 50, 0, Math.PI * 2, true)
-
-            if (i=3) { 
-             ctx.stroke();
-            } 
-            else {
-              ctx.fill();
-            }
-          }
-        }
-      }
-    }
-    </script>
+h1
+{
+  position: absolute;
+    left: 0px;
+    top: 0px;
+    font-size: 40px; /* Titres de 40 pixels */
+    font-family: 'Montserrat Light', arial;
+    color: #0099ff;
+}
 
 
-    <script LANGUAGE="Javascript">
-    function readFile(file)
-    {
-      var OA=document.getElementById("test");
+.button_draw {
+  display: block;
+  /*justify-content: center;
+  align-items: flex-end;*/
+  margin: 0, auto;
 
-      OA.onclick=function()
-      {
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", file, false);
-        rawFile.onreadystatechange = function ()
-        {
-          if(rawFile.readyState === 4)
-            {
-               if(rawFile.status === 200 || rawFile.status == 0)
-              {
-                  var allText = rawFile.responseText;
-                  alert(allText);
-              }
-            }
-        }
-      }
-    rawFile.send(null);
-    }
-    </script>
-  </head>
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0099ff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
 
+  /*position: absolute;
+  bottom: 30px;
+  right: 600px;*/
+}
 
-  <body>
+.button_draw:hover {
+  background-color: #0099ff;
+  justify-content: center;
+  align-items: flex-end;
+}
 
-    <div class="header" id="myHeader">
-    <h2>Tracking Map</h2>
-    </div>
+.button_draw:active {
+  background-color: #0099ff;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  justify-content: center;
+  align-items: flex-end;
+}
 
-    <canvas id="canvas" width="800" height="400" align=center></canvas>
-    
-    <div id="conteneur">
-    <button onclick="draw_rect()" class="button">Draw map</button>
-    </div>
-    <script>
-      function draw_rect() {
-        var canvas = document.getElementById("canvas");
-        if (canvas.getContext) {
-          var ctx = canvas.getContext('2d');
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px 16px;
+  background: #0099ff;
+  color: #ffffff;
+  font-size: 25px; /* Titres de 40 pixels */
+  font-family: 'Montserrat Light', arial;
+}
 
-          ctx.fillStyle = 'rgb(155, 184, 211)';
-          ctx.fillRect(100, 100, 200, 50);
-
-          for(var i = 1; i < 4; i++) {
-            ctx.arc(75*i, 75*i, 5, 0, Math.PI * 2, true);
-            ctx.fill();
-          }
-
-          var radgrad = ctx.createRadialGradient(95, 15, 15, 102, 20, 40);
-          radgrad.addColorStop(0, '#00C9FF');
-          radgrad.addColorStop(0.9, '#00B5E2');
-          radgrad.addColorStop(1, 'rgba(0, 201, 255, 0)');
-          ctx.fillStyle = radgrad;
-          ctx.fillRect(0, 0, 150, 150);
-        }
-      }
-    </script>
-
-</body>
-</html>
+#canvas {
+ border: 1px dotted grey;
+ width: 50%;
+ height: 500px;
+ display: block;
+ margin: 0 auto;
+}

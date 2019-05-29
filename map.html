@@ -5,72 +5,151 @@
     <link href="http://fr.allfont.net/allfont.css?fonts=montserrat-light" rel="stylesheet" type="text/css" />
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="style.css" />
-
-  
-    <script type="application/javascript">
-    function dessiner() {
-      var canvas = document.getElementById('canvas');
-      if (canvas.getContext) {
-        var ctx = canvas.getContext('2d');
-
-        for(var i = 1; i < 5; i++) {
-          for(var j = 1; j < 4; j++) {
-            ctx.beginPath();
-            var x = 25 + j * 100; // Coordonnée x
-            var y = 25 + i * 100; // Coordonnée y
-            ctx.arc(x, y, 50, 0, Math.PI * 2, true)
-
-            if (i=3) { 
-             ctx.stroke();
-            } 
-            else {
-              ctx.fill();
-            }
-          }
-        }
-      }
-    }
-    </script>
+    <title> Tracking Map </title>
 
 
-    <script LANGUAGE="Javascript">
-    function readFile(file)
-    {
-      var OA=document.getElementById("test");
+<!-- --------------------------------------------------------------
+Define json and stock it in localStorage to test datas of positions
+-------------------------------------------------------------------- -->
+    <script LANGUAGE="text/javascript">
 
-      OA.onclick=function()
+      let json = {
+      "person":[
       {
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", file, false);
-        rawFile.onreadystatechange = function ()
+        "bodyId": 145,
+        "path": [
         {
-          if(rawFile.readyState === 4)
-            {
-               if(rawFile.status === 200 || rawFile.status == 0)
-              {
-                  var allText = rawFile.responseText;
-                  alert(allText);
-              }
-            }
+          "status":"Tracking started",
+          "date": "23/05/2019",
+          "hour": "15:06:14",
+          "Wx":-499.699,
+          "Wy":136.499,
+          "Wz":1296.22
+        },
+        {
+          "status":"Tracking",
+          "date": "23/05/2019",
+          "hour": "15:06:15",
+          "Wx":-488.701,
+          "Wy":138.207,
+          "Wz":1309.28
+        },
+        {
+          "status":"Tracking",
+          "date": "23/05/2019",
+          "hour": "15:06:16",
+          "Wx":-474.809,
+          "Wy":140.564,
+          "Wz":1320.75
         }
+        ]
       }
-    rawFile.send(null);
-    }
+      {
+        "bodyId": 70,
+        "path": [
+        {
+          "status":"Tracking started",
+          "date": "23/05/2019",
+          "hour": "15:06:14",
+          "Wx":-399.699,
+          "Wy":36.499,
+          "Wz":1196.22
+        }
+        {
+          "status":"Tracking started",
+          "date": "23/05/2019",
+          "hour": "15:06:14",
+          "Wx":-399.699,
+          "Wy":36.499,
+          "Wz":1196.22
+        }
+        ]
+      }
+      ]
+      
+      }
+
+      localStorage.setItem("dataCamera",JSON.stringify(json));
+
     </script>
+
   </head>
 
 
   <body>
-    <canvas id="canvas" width="800" height="400" align=center></canvas>
-    <script type="text/javascript" src="draw.js"></script>
 
     <div class="header" id="myHeader">
     <h2>Tracking Map</h2>
     </div>
 
-    <div id="conteneur">
-    <button onclick="draw_rect()" class="button">Draw map</button>
-    </div>
+    <canvas id="canvas"></canvas>
 
-</body>
+<!-- --------------------------------------------------------------
+JS Function to draw a hot zone, a zone with lot of traffic
+-------------------------------------------------------------------- -->
+    <script type="text/javascript">
+      function draw_hotzone() {
+        var canvas = document.getElementById("canvas");
+
+        if (canvas.getContext) {
+          var ctx = canvas.getContext('2d');
+
+          for(i=0; i<num_points; i++){
+            var radgrad = ctx.createRadialGradient(45, 45, 10, 52, 50, 30);
+            radgrad.addColorStop(0, '#00feff');
+            radgrad.addColorStop(0.9, '#0099ff');
+            radgrad.addColorStop(1, 'rgba(1, 159, 98, 0)');
+
+            ctx.fillStyle = radgrad;
+            ctx.fillRect(0, 0, 150, 150);
+          }
+        }
+      }
+    </script>
+
+
+
+<!-- --------------------------------------------------------------
+JS Function to draw client path, step by step
+-------------------------------------------------------------------- -->
+    <script type="text/javascript">
+      function draw_path() {
+        var canvas = document.getElementById("canvas");
+
+        coordX=new Array(100, 112, 120)
+        coordY=new Array(100, 97, 90)
+        
+        //Read the json from 
+        var string_json = localStorage.getItem("dataCamera");
+        var json = string_json && JSON.parse(string_json);
+
+        //alert("test")
+        alert(json);
+
+        if (canvas.getContext) {
+          alert("OK CONTEXT")
+          var ctx = canvas.getContext('2d');
+
+          for(i=0; i<coordX.length; i++){
+            var cercle = new Path2D();
+            cercle.moveTo(coordX[i], coordY[i]);
+            cercle.arc(coordX[i], coordY[i], 2, 0, 2 * Math.PI);
+            ctx.fill(cercle);
+          }
+
+          ctx.beginPath();
+          for(i=0; i<coordX.length; i++){
+            ctx.lineTo(coordX[i],coordY[i]);
+          }
+          ctx.stroke();
+        }
+      }
+    </script>
+
+    <form>
+    <input type="button" value="Draw map" class="button_draw" onclick="draw_path()"/>
+    </form>
+
+  </body>
+  
 </html>

@@ -26,6 +26,8 @@ function draw_path(){
     	}
 	}
 
-function display() {
-   alert("Hello World!");
-}
+function test(){
+
+		alert("test!");
+
+	}
