@@ -1,4 +1,4 @@
-let json = { "points " : [ 
+{ "points": [ 
 { "bodyId": 197, "status": " Tracking started" , "date": "03/06/2019" , "hour": "17:08:56", "Wx": -409.362, "Wy": 1.73797, "Wz": 1212.12}
 ,{ "bodyId": 197, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:08:56", "Wx": -391.465, "Wy": 5.57604, "Wz": 1221.99}
 ,{ "bodyId": 197, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:08:56", "Wx": -383.611, "Wy": 17.9762, "Wz": 1221.67}
@@ -83,11 +83,6 @@ let json = { "points " : [
 ,{ "bodyId": 200, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -503.435, "Wy": 34.505, "Wz": 1060.12}
 ,{ "bodyId": 200, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -503.435, "Wy": 34.505, "Wz": 1060.12}
 ,{ "bodyId": 200, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -503.435, "Wy": 34.505, "Wz": 1060.12}
-,{ "bodyId": 200, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -503.435, "Wy": 34.505, "Wz": 1060.12}
+,{ "bodyId": 200, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:02", "Wx": -503.435, "Wy": 34.505, "Wz": 1060.12}
 
-,{ "bodyId": 33, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -40, "Wy": 34.505, "Wz": 1060.12}
-,{ "bodyId": 33, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -45, "Wy": 34.505, "Wz": 1034.12}
-,{ "bodyId": 33, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -50, "Wy": 34.505, "Wz": 1025.12}
-,{ "bodyId": 33, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -52, "Wy": 34.505, "Wz": 1016.12}
-,{ "bodyId": 33, "status": " Tracking" , "date": "03/06/2019" , "hour": "17:09:01", "Wx": -56, "Wy": 34.505, "Wz": 1009.12}
 ]}
