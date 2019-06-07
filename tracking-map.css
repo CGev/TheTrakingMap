@@ -1,12 +1,12 @@
-
-h1
-{
-  position: absolute;
-    left: 0px;
-    top: 0px;
-    font-size: 40px; /* Titres de 40 pixels */
-    font-family: 'Montserrat Light', arial;
-    color: #0099ff;
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px 16px;
+  background: #0099ff;
+  color: #ffffff;
+  font-size: 25px; /* Titres de 40 pixels */
+  font-family: 'Montserrat Light', arial;
 }
 
 
@@ -48,16 +48,7 @@ h1
   align-items: flex-end;
 }
 
-.header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 10px 16px;
-  background: #0099ff;
-  color: #ffffff;
-  font-size: 25px; /* Titres de 40 pixels */
-  font-family: 'Montserrat Light', arial;
-}
+
 
 #container{
   display: flex;
